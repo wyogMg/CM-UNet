@@ -4,7 +4,7 @@
 # How to use
 
 # Requirements
-Ubuntu 20.04
-Pytorch 2.0.0
-Python 3.8
+Ubuntu 20.04  
+Pytorch 2.0.0  
+Python 3.8  
 CUDA 11.8
