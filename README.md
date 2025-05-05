@@ -27,12 +27,8 @@ For inference, you need to run the test.py. Most of the parameters are like for 
 
 # Citation
 ```
-@article{ZHANG202412950,  
-  title={A dual encoder crack segmentation network with Haar wavelet-based high-low frequency attention},  
-  journal={Expert Systems with Applications},  
-  pages={124950},  
-  year={2024},  
-  issn={0957-4174},  
-  doi={10.1016/j.eswa.2024.124950},  
-  author={Jianming Zhang and Zhigao Zeng and Pradip Kumar Sharma and Osama Alfarraj and Amr Tolba}  
+@article{
+  title={The U-shaped crack segmentation network based on channel-Mamba enhancement and multi-scale aggregation},  
+  journal={The Visual Computer},  
+  author={Yongming Wang, Shigang Hu, Guoyi Zheng, Jianxin Wang} 
 }  
