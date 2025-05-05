@@ -1,6 +1,7 @@
 # CM-UNet
 
-[![image](https://github.com/user-attachments/assets/5733e6b8-a0fa-41d0-a44a-95e79ff1e964)]
+![image](https://github.com/user-attachments/assets/330c184e-4e79-4a8f-b6c5-71c7ebd9cf54)
+
 
 
 ![image](https://github.com/user-attachments/assets/95523698-abe3-486c-8ba0-8afaef072cac)
