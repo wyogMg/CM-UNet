@@ -25,12 +25,12 @@ CUDA 11.8
 For inference, you need to run the test.py. Most of the parameters are like for the train.py.
 
 # Citation
-[Upl@article{ZHANG2024124950,
-title = {A dual encoder crack segmentation network with Haar wavelet-based high-low frequency attention},
-journal = {Expert Systems with Applications},
-pages = {124950},
-year = {2024},
-issn = {0957-4174},
-doi = {10.1016/j.eswa.2024.124950},
-author = {Jianming Zhang and Zhigao Zeng and Pradip Kumar Sharma and Osama Alfarraj and Amr Tolba and Jin Wang},
-}oading Citation.txt…]()
+```@article{ZHANG202412950,  
+  title={A dual encoder crack segmentation network with Haar wavelet-based high-low frequency attention},  
+  journal={Expert Systems with Applications},  
+  pages={124950},  
+  year={2024},  
+  issn={0957-4174},  
+  doi={10.1016/j.eswa.2024.124950},  
+  author={Jianming Zhang and Zhigao Zeng and Pradip Kumar Sharma and Osama Alfarraj and Amr Tolba}  
+}  
