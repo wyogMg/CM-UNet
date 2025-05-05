@@ -8,3 +8,10 @@ Ubuntu 20.04
 Pytorch 2.0.0  
 Python 3.8  
 CUDA 11.8
+
+
+# Training
+
+
+# Inference
+For inference, you need to run the test.py. Most of the parameters are like for the train.py.
