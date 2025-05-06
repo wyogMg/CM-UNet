@@ -13,13 +13,13 @@ This module introduces an efficient long-range dependency modeling approach that
 Designed to preserve fine-grained crack details, this module employs parameter-efficient large separable convolutional kernels to enhance local feature interaction and reduce the texture degradation often seen in state-space models.
 
 <p align="center">  
-  <img src="https://github.com/user-attachments/assets/b4359e71-e724-4b64-96eb-11d406022c05" width="400" />  
+  <img src="https://github.com/user-attachments/assets/b4359e71-e724-4b64-96eb-11d406022c05" width="300" />  
 </p>  
 
 This module dynamically fuses features from multiple scales using a learnable adaptive weighting mechanism. Integrated into the skip connections, it bridges the semantic gap between encoder and decoder, improving the overall feature representation capability of the network.
 
 <p align="center">  
-  <img src="https://github.com/user-attachments/assets/4b03fa7c-df49-4239-ac61-fe20f56b45d3" width="400" />  
+  <img src="https://github.com/user-attachments/assets/4b03fa7c-df49-4239-ac61-fe20f56b45d3" width="500" />  
 </p>  
 
 
