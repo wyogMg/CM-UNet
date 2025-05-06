@@ -24,10 +24,17 @@
 # How to use
 
 # Requirements
-Ubuntu 20.04  
-Pytorch 2.0.0  
-Python 3.8  
-CUDA 11.8
+- NVIDIA GPU: 
+  - Python 3.10.13
+  - conda create -n your_env_name python=3.10.13  
+- torch 2.1.1 + cu118  
+  - pip install torch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 --index-url https://download.pytorch.org/whl/cu118  
+
+- Ubuntu 20.04  
+- Pytorch 2.0.0  
+- Python 3.8  
+- CUDA 11.8
+- an NVIDIA GeForce RTX 3090 GPU with 24 GB of memory.
 
 
 # Training
