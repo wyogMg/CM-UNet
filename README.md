@@ -24,17 +24,14 @@
 # How to use
 
 # Requirements
-- NVIDIA GPU: 
-  - Python 3.10.13
-  - conda create -n your_env_name python=3.10.13  
-- torch 2.1.1 + cu118  
-  - pip install torch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 --index-url https://download.pytorch.org/whl/cu118  
-
 - Ubuntu 20.04  
 - Pytorch 2.0.0  
 - Python 3.8  
-- CUDA 11.8
-- an NVIDIA GeForce RTX 3090 GPU with 24 GB of memory.
+- torch 2.0.0 + cu118  
+  - pip install torch==2.0.0 torchvision==0.15.1 --index-url https://download.pytorch.org/whl/cu118
+- Hardware Spec
+  - an NVIDIA GeForce RTX 3090 GPU with 24 GB of memory
+
 
 ```
 torch @ http://download.pytorch.org/whl/cu118/torch-2.0.0%2Bcu118-cp38-cp38-linux_x86_64.whl
@@ -59,10 +56,20 @@ PyWavelets==1.4.1
 For the training, you must run the `train.py` with your desired arguments. You need to change variables and arguments respectively. Below, you can find a brief description of the arguments.
 ```
 --savedir  
-The save address of the trained model file  
+Path to save the trained model file  
 
+--imgdir  
+Path to the dataset images  
+
+--labdir  
+Path to the dataset labels  
+
+--imgsz  
+Input image size for the network  
+
+--filename  
+Path to save the loss values  
 ```
-
 # Inference
 For inference, you need to run the `test.py`. Most of the parameters are like for the `train.py`.
 
