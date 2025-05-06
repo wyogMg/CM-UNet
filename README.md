@@ -36,6 +36,24 @@
 - CUDA 11.8
 - an NVIDIA GeForce RTX 3090 GPU with 24 GB of memory.
 
+```
+torch @ http://download.pytorch.org/whl/cu118/torch-2.0.0%2Bcu118-cp38-cp38-linux_x86_64.whl
+torchvision @ http://download.pytorch.org/whl/cu118/torchvision-0.15.1%2Bcu118-cp38-cp38-linux_x86_64.whl
+mamba-ssm==1.1.4
+pandas==2.0.3
+causal-conv1d==1.1.3.post1
+torch==2.0.0+cu118  
+torchvision==0.15.1+cu118  
+timm==0.9.12  
+einops==0.7.0  
+numpy==1.24.2  
+matplotlib==3.7.1  
+Pillow==10.4.0  
+opencv-python==4.10.0.84
+tqdm==4.66.4
+einops==0.7.0
+PyWavelets==1.4.1
+```
 
 # Training
 For the training, you must run the `train.py` with your desired arguments. You need to change variables and arguments respectively. Below, you can find a brief description of the arguments.
