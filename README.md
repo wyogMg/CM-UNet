@@ -1,7 +1,7 @@
 # CM-UNet
 CM-UNet adopts an asymmetric U-shaped encoder-decoder structure. It can be described as an encoder layer, a decoder layer, a bottleneck layer, and skip-connection. As our core component, HCME is used as the foundational module for the encoder layer, decoder layer, and bottleneck layer.
 <p align="center">  
-  <img src="https://github.com/user-attachments/assets/7338b745-7932-4b4e-acd1-00ce3615db2e" width="800" />  
+  <img src="https://github.com/user-attachments/assets/221e1021-027a-4d9a-9c2f-c59f51ab7390" width="800" />  
 </p>  
 
 
