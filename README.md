@@ -39,11 +39,11 @@
 
 # Training
 For the training, you must run the `train.py` with your desired arguments. You need to change variables and arguments respectively. Below, you can find a brief description of the arguments.
-'''
+```
 --savedir  
 The save address of the trained model file  
 
-'''
+```
 
 # Inference
 For inference, you need to run the test.py. Most of the parameters are like for the train.py.
