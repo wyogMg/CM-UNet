@@ -4,6 +4,7 @@
   <img src="https://github.com/user-attachments/assets/330c184e-4e79-4a8f-b6c5-71c7ebd9cf54" width="800" />  
 </p>  
 
+This module introduces an efficient long-range dependency modeling approach that combines the principles of Vision Mamba with channel attention mechanisms. It captures global context effectively while maintaining linear complexity, enabling better feature relevance suppression.
 
 <p align="center">  
   <img src="https://github.com/user-attachments/assets/596189a3-28b4-4e62-8127-e746a94b5f82" width="400" />  
