@@ -1,5 +1,5 @@
 # CM-UNet
-
+CM-UNet adopts an asymmetric U-shaped encoder-decoder structure. It can be described as an encoder layer, a decoder layer, a bottleneck layer, and skip-connection. As our core component, HCME is used as the foundational module for the encoder layer, decoder layer, and bottleneck layer.
 <p align="center">  
   <img src="https://github.com/user-attachments/assets/330c184e-4e79-4a8f-b6c5-71c7ebd9cf54" width="800" />  
 </p>  
@@ -10,15 +10,17 @@ This module introduces an efficient long-range dependency modeling approach that
   <img src="https://github.com/user-attachments/assets/596189a3-28b4-4e62-8127-e746a94b5f82" width="400" />  
 </p>  
 
+Designed to preserve fine-grained crack details, this module employs parameter-efficient large separable convolutional kernels to enhance local feature interaction and reduce the texture degradation often seen in state-space models.
+
 <p align="center">  
   <img src="https://github.com/user-attachments/assets/b4359e71-e724-4b64-96eb-11d406022c05" width="400" />  
 </p>  
 
+This module dynamically fuses features from multiple scales using a learnable adaptive weighting mechanism. Integrated into the skip connections, it bridges the semantic gap between encoder and decoder, improving the overall feature representation capability of the network.
+
 <p align="center">  
   <img src="https://github.com/user-attachments/assets/4b03fa7c-df49-4239-ac61-fe20f56b45d3" width="400" />  
 </p>  
-
-
 
 
 
