@@ -1,5 +1,9 @@
 # CM-UNet
 
+<p align="center">  
+  <img src="[https://example.com/your-image.png](https://github.com/user-attachments/assets/330c184e-4e79-4a8f-b6c5-71c7ebd9cf54)" width="600" />  
+</p>  
+
 ![image](https://github.com/user-attachments/assets/330c184e-4e79-4a8f-b6c5-71c7ebd9cf54)
 
 
