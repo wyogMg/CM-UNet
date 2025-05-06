@@ -1,4 +1,5 @@
-# CM-UNet
+# CM-UNet 
+## Overview
 CM-UNet adopts an asymmetric U-shaped encoder-decoder structure. It can be described as an encoder layer, a decoder layer, a bottleneck layer, and skip-connection. As our core component, HCME is used as the foundational module for the encoder layer, decoder layer, and bottleneck layer.
 <p align="center">  
   <img src="https://github.com/user-attachments/assets/97049f21-5d3e-49ec-baca-3a47de1407b3" width="800" />  
@@ -25,9 +26,9 @@ This module dynamically fuses features from multiple scales using a learnable ad
 
 
 
-# How to use
+## How to use
 
-# Requirements
+### Requirements
 - Ubuntu 20.04  
 - Pytorch 2.0.0  
 - Python 3.8  
@@ -56,7 +57,7 @@ einops==0.7.0
 PyWavelets==1.4.1
 ```
 
-# Training
+### Training
 For the training, you must run the `train.py` with your desired arguments. You need to change variables and arguments respectively. Below, you can find a brief description of the arguments.
 ```
 --savedir  
@@ -74,10 +75,10 @@ Input image size for the network
 --filename  
 Path to save the loss values  
 ```
-# Inference
+### Inference
 For inference, you need to run the `test.py`. Most of the parameters are like for the `train.py`.
 
-# Citation
+### Citation
 ```
 @article{
   title={The U-shaped crack segmentation network based on channel-Mamba enhancement and multi-scale aggregation},  
