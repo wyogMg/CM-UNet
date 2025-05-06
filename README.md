@@ -1,7 +1,7 @@
 # CM-UNet
 
 <p align="center">  
-  <img src="https://github.com/user-attachments/assets/330c184e-4e79-4a8f-b6c5-71c7ebd9cf54" width="600" />  
+  <img src="https://github.com/user-attachments/assets/330c184e-4e79-4a8f-b6c5-71c7ebd9cf54" width="800" />  
 </p>  
 
 
@@ -38,7 +38,7 @@
 
 
 # Training
-For the training, you must run the 'train.py' with your desired arguments. You need to change variables and arguments respectively. Below, you can find a brief description of the arguments.
+For the training, you must run the `train.py` with your desired arguments. You need to change variables and arguments respectively. Below, you can find a brief description of the arguments.
 '''
 --savedir  
 The save address of the trained model file  
