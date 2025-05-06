@@ -5,20 +5,20 @@ CM-UNet adopts an asymmetric U-shaped encoder-decoder structure. It can be descr
   <img src="https://github.com/user-attachments/assets/97049f21-5d3e-49ec-baca-3a47de1407b3" width="800" />  
 </p>  
 
-This module introduces an efficient long-range dependency modeling approach that combines the principles of Vision Mamba with channel attention mechanisms. It captures global context effectively while maintaining linear complexity, enabling better feature relevance suppression.
+1.This module introduces an efficient long-range dependency modeling approach that combines the principles of Vision Mamba with channel attention mechanisms. It captures global context effectively while maintaining linear complexity, enabling better feature relevance suppression.
 
 <p align="center">  
   <img src="https://github.com/user-attachments/assets/cfdaae17-cb7b-469a-b707-0211118a79fb" width="400" />  
 </p>  
 
-Designed to preserve fine-grained crack details, this module employs parameter-efficient large separable convolutional kernels to enhance local feature interaction and reduce the texture degradation often seen in state-space models.
+2.Designed to preserve fine-grained crack details, this module employs parameter-efficient large separable convolutional kernels to enhance local feature interaction and reduce the texture degradation often seen in state-space models.
 
 <p align="center">  
   <img src="https://github.com/user-attachments/assets/b288f617-da17-48fa-9999-396ff19fd6e3" width="300" />  
 </p>  
 
 
-This module dynamically fuses features from multiple scales using a learnable adaptive weighting mechanism. Integrated into the skip-connection, it bridges the semantic gap between encoder and decoder, improving the overall feature representation capability of the network.
+3.This module dynamically fuses features from multiple scales using a learnable adaptive weighting mechanism. Integrated into the skip-connection, it bridges the semantic gap between encoder and decoder, improving the overall feature representation capability of the network.
 
 <p align="center">  
   <img src="https://github.com/user-attachments/assets/8c254392-4ed4-4c1c-844a-d75666297a98" width="400" />  
