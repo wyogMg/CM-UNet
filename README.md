@@ -19,7 +19,7 @@ Designed to preserve fine-grained crack details, this module employs parameter-e
 This module dynamically fuses features from multiple scales using a learnable adaptive weighting mechanism. Integrated into the skip connections, it bridges the semantic gap between encoder and decoder, improving the overall feature representation capability of the network.
 
 <p align="center">  
-  <img src="https://github.com/user-attachments/assets/4b03fa7c-df49-4239-ac61-fe20f56b45d3" width="500" />  
+  <img src="https://github.com/user-attachments/assets/4b03fa7c-df49-4239-ac61-fe20f56b45d3" width="400" />  
 </p>  
 
 
