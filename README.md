@@ -1,20 +1,20 @@
 # CM-UNet
 
 <p align="center">  
-  <img src="https://github.com/user-attachments/assets/330c184e-4e79-4a8f-b6c5-71c7ebd9cf54" width="300" />  
+  <img src="https://github.com/user-attachments/assets/330c184e-4e79-4a8f-b6c5-71c7ebd9cf54" width="600" />  
 </p>  
 
 
 <p align="center">  
-  <img src="https://github.com/user-attachments/assets/596189a3-28b4-4e62-8127-e746a94b5f82" width="300" />  
+  <img src="https://github.com/user-attachments/assets/596189a3-28b4-4e62-8127-e746a94b5f82" width="400" />  
 </p>  
 
 <p align="center">  
-  <img src="https://github.com/user-attachments/assets/b4359e71-e724-4b64-96eb-11d406022c05" width="300" />  
+  <img src="https://github.com/user-attachments/assets/b4359e71-e724-4b64-96eb-11d406022c05" width="400" />  
 </p>  
 
 <p align="center">  
-  <img src="https://github.com/user-attachments/assets/4b03fa7c-df49-4239-ac61-fe20f56b45d3" width="300" />  
+  <img src="https://github.com/user-attachments/assets/4b03fa7c-df49-4239-ac61-fe20f56b45d3" width="400" />  
 </p>  
 
 
