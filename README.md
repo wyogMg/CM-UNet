@@ -82,7 +82,6 @@ For inference, you need to run the `test.py`. Most of the parameters are like fo
 ```
 @article{
   title={The U-shaped crack segmentation network based on channel-Mamba enhancement and multi-scale aggregation},  
-  journal={The Visual Computer},  
   author={Yongming Wang, Shigang Hu, Guoyi Zheng, Jianxin Wang} 
 }
 ```
