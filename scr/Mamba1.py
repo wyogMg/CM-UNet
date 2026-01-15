@@ -250,52 +250,99 @@ class LSKA(nn.Module):
         attn = self.conv_spatial_v(attn)
         return attn
 
-class DWMlp(nn.Module):
-    def __init__(self, in_features, hidden_features=None, out_features=None, act_layer=nn.GELU, drop=0., res=224, linear=False):
+
+class SpatialConvModule(nn.Module):
+    def __init__(self, channels, scale):
+        super(SpatialConvModule, self).__init__()
+
+        self.conv_spatial_h = nn.Conv2d(channels, channels, kernel_size=(1, scale), padding=(0, scale // 2),
+                                        groups=channels)
+        self.conv_spatial_v = nn.Conv2d(channels, channels, kernel_size=(scale, 1), padding=(scale // 2, 0),
+                                        groups=channels)
+
+    def forward(self, x):
+        x_h = self.conv_spatial_h(x)  
+        x_v = self.conv_spatial_v(x)  
+        return x_h + x_v  
+
+
+class MultiScaleDWConv(nn.Module):
+    def __init__(self, dim, scale=(1, 3, 5, 7)):
+        super().__init__()
+        self.scale = scale
+        self.channels = []
+        self.proj = nn.ModuleList()
+        for i in range(len(scale)):
+            if i == 0:
+                channels = dim - dim // len(scale) * (len(scale) - 1)
+            else:
+                channels = dim // len(scale)
+            conv = SpatialConvModule(channels=channels, scale=scale[i])
+            self.channels.append(channels)
+            self.proj.append(conv)
+
+    def forward(self, x):
+        x = torch.split(x, split_size_or_sections=self.channels, dim=1)
+        out = []
+        for i, feat in enumerate(x):
+            out.append(self.proj[i](feat))
+        x = torch.cat(out, dim=1)
+        return x
+
+
+class Mlp(nn.Module):  
+    """
+    Mlp implemented by with 1x1 convolutions.
+
+    Input: Tensor with shape [B, C, H, W].
+    Output: Tensor with shape [B, C, H, W].
+    Args:
+        in_features (int): Dimension of input features.
+        hidden_features (int): Dimension of hidden features.
+        out_features (int): Dimension of output features.
+        act_cfg (dict): The config dict for activation between pointwise
+            convolution. Defaults to ``dict(type='GELU')``.
+        drop (float): Dropout rate. Defaults to 0.0.
+    """
+
+    def __init__(self,
+                 in_features,
+                 hidden_features=None,
+                 out_features=None,
+                 act_cfg=dict(type='GELU'),
+                 drop=0, ):
         super().__init__()
         out_features = out_features or in_features
         hidden_features = hidden_features or in_features
-        self.fc1 = nn.Linear(in_features, hidden_features)
-        self.hid = hidden_features
-        self.lka = LSKA(hidden_features)
-        self.act = act_layer()
-        self.fc2 = nn.Linear(hidden_features, out_features)
+        self.fc1 = nn.Sequential(
+            nn.Conv2d(in_features, hidden_features, kernel_size=1, bias=False),
+            build_activation_layer(act_cfg),
+            nn.BatchNorm2d(hidden_features),
+        )
+        self.dwconv = MultiScaleDWConv(hidden_features)
+        self.act = build_activation_layer(act_cfg)
+        self.norm = nn.BatchNorm2d(hidden_features)
+        self.fc2 = nn.Sequential(
+            nn.Conv2d(hidden_features, in_features, kernel_size=1, bias=False),
+            nn.BatchNorm2d(in_features),
+        )
         self.drop = nn.Dropout(drop)
-        self.linear = linear
-        self.apply(self._init_weights)
-        self.h = res
-        self.w = res
-    def _init_weights(self, m):
-        if isinstance(m, nn.Linear):
-            trunc_normal_(m.weight, std=.02)
-            if isinstance(m, nn.Linear) and m.bias is not None:
-                nn.init.constant_(m.bias, 0)
-        elif isinstance(m, nn.LayerNorm):
-            nn.init.constant_(m.bias, 0)
-            nn.init.constant_(m.weight, 1.0)
-        elif isinstance(m, nn.Conv2d):
-            fan_out = m.kernel_size[0] * m.kernel_size[1] * m.out_channels
-            fan_out //= m.groups
-            m.weight.data.normal_(0, math.sqrt(2.0 / fan_out))
-            if m.bias is not None:
-                m.bias.data.zero_()
 
     def forward(self, x):
-
-        B, H, W, C = x.shape
-        x = x.reshape(B, H * W, C)
+        x = x.permute(0, 3, 1, 2).contiguous()
         x = self.fc1(x)
-        x = x.permute(0, 2, 1).reshape(B, self.hid, self.h, self.w)
-        x = self.lka(x)
-        x = self.act(x)
-        x = x.reshape(B, self.hid, -1).permute(0,2, 1)
+
+        x = self.dwconv(x) + x
+        x = self.norm(self.act(x))
+
         x = self.drop(x)
         x = self.fc2(x)
         x = self.drop(x)
-        b, n, c = x.shape
-        h = w = int(n ** 0.5)
-        x = x.reshape(b, h, w, c)
+        x = x.permute(0, 2, 3, 1).contiguous()
+
         return x
+
+
 
 class VSSBlock(nn.Module):
     def __init__(
@@ -315,7 +362,7 @@ class VSSBlock(nn.Module):
         self.skip_scale= nn.Parameter(torch.ones(hidden_dim))
         self.ln_2 = nn.LayerNorm(hidden_dim)
         self.skip_scale2 = nn.Parameter(torch.ones(hidden_dim))
-        self.dmlp = DWMlp(hidden_dim, hidden_dim*2, res=input_resolution)
+        self.dmlp = Mlp(hidden_dim, hidden_dim * 2)
 
     def forward(self, input):
         # x [B,HW,C]
