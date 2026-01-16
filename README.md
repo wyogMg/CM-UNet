@@ -2,7 +2,7 @@
 ## Overview
 CM-UNet adopts an asymmetric U-shaped encoder-decoder structure. It can be described as an encoder layer, a decoder layer, a bottleneck layer, and skip-connection. As our core component, HCME is used as the foundational module for the encoder layer, decoder layer, and bottleneck layer.
 <p align="center">  
-  <img src="https://github.com/user-attachments/assets/97049f21-5d3e-49ec-baca-3a47de1407b3" width="800" />  
+  <img width="1065" height="817" alt="image" src="https://github.com/user-attachments/assets/6a3dee73-7bd2-476c-aee8-7feab2909611" />  
 </p>  
 
 1.This module introduces an efficient long-range dependency modeling approach that combines the principles of Vision Mamba with channel attention mechanisms. It captures global context effectively while maintaining linear complexity, enabling better feature relevance suppression.
