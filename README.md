@@ -8,20 +8,20 @@ CM-UNet adopts an asymmetric U-shaped encoder-decoder structure. It can be descr
 1.This module introduces an efficient long-range dependency modeling approach that combines the principles of Vision Mamba with channel attention mechanisms. It captures global context effectively while maintaining linear complexity, enabling better feature relevance suppression.
 
 <p align="center">  
-  <img src="https://github.com/user-attachments/assets/cfdaae17-cb7b-469a-b707-0211118a79fb" width="400" />  
+  <img width="480" height="673" alt="image" src="https://github.com/user-attachments/assets/6cb92682-85dd-4376-9ccf-4805eb2eba82" />
 </p>  
 
 2.Designed to preserve fine-grained crack details, this module employs parameter-efficient large separable convolutional kernels to enhance local feature interaction and reduce the texture degradation often seen in state-space models.
 
 <p align="center">  
-  <img src="https://github.com/user-attachments/assets/b288f617-da17-48fa-9999-396ff19fd6e3" width="300" />  
+  <img width="518" height="257" alt="image" src="https://github.com/user-attachments/assets/5c623ecc-fe28-428a-a117-e2472e4fe45b" />
 </p>  
 
 
 3.This module dynamically fuses features from multiple scales using a learnable adaptive weighting mechanism. Integrated into the skip-connection, it bridges the semantic gap between encoder and decoder, improving the overall feature representation capability of the network.
 
 <p align="center">  
-  <img src="https://github.com/user-attachments/assets/8c254392-4ed4-4c1c-844a-d75666297a98" width="400" />  
+  <img width="518" height="497" alt="image" src="https://github.com/user-attachments/assets/eb623ccf-260c-45aa-b235-5b77d2f7d748" />
 </p>  
 
 
