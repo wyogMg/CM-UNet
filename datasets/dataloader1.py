@@ -106,8 +106,8 @@ def imshow_image(mydata_loader):
 
 if __name__ == '__main__':
 
-    d = Datases_loader(r'/root/autodl-tmp/dataset/Deepcrack/CrackTree260/test_img',
-                       r'/root/autodl-tmp/dataset/Deepcrack/CrackTree260/test_lab',
+    d = Datases_loader(r'/test_img',
+                       r'/test_lab',
                        512, 512)
 
     mydata_loader = DataLoader(d, batch_size=8, shuffle=False)
