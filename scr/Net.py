@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from Ablation.Mamba1 import VSSBlock
+from Mamba import VSSBlock
 from timm.models.layers import DropPath, trunc_normal_, to_2tuple
 from Ablation.Separable_convolution import S_conv
 from thop import profile
