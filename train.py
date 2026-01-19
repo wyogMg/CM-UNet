@@ -1,7 +1,7 @@
 import torch
 import torch.optim as optim
 from torch.utils.data import DataLoader
-from Net2_3 import Net
+from Net import Net
 from dataloader1 import Datases_loader as dataloader
 from Dice_BCEwithLogits import SoftDiceLoss as bcedice
 
