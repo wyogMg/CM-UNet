@@ -6,57 +6,91 @@ from Ablation.Separable_convolution import S_conv
 from thop import profile
 import torch.nn.functional as F
 
-class LKA1(nn.Module):
-    def __init__(self, dim):
+import torch
+import torch.nn as nn
+import math
+
+
+class MultiScaleLKA(nn.Module):
+    """
+    Multi-Scale Large Kernel Attention (MSLKA)
+    Used in skip-connection for multi-scale spatial attention.
+    """
+    def __init__(self, channels: int):
         super().__init__()
-        self.conv3 = nn.Conv2d(dim, dim, 3, padding=1, groups=dim)
-        self.conv5 = nn.Conv2d(dim, dim, 5, padding=2, groups=dim)
-        self.conv_spatial = nn.Conv2d(dim, dim, 7, stride=1, padding=9, groups=dim, dilation=3)
-        self.conv1 = nn.Conv2d(dim*3, dim, 1)
+
+        self.dw_conv_3 = nn.Conv2d(
+            channels, channels, kernel_size=3, padding=1, groups=channels
+        )
+        self.dw_conv_5 = nn.Conv2d(
+            channels, channels, kernel_size=5, padding=2, groups=channels
+        )
+        self.dw_conv_7 = nn.Conv2d(
+            channels, channels, kernel_size=7, padding=9, dilation=3, groups=channels
+        )
+
+        self.pw_conv = nn.Conv2d(channels * 3, channels, kernel_size=1)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """
+        Args:
+            x: Tensor of shape (B, C, H, W)
+        """
+        attn_3 = self.dw_conv_3(x)
+        attn_5 = self.dw_conv_5(x)
+        attn_7 = self.dw_conv_7(x)
+
+        attn = torch.cat([attn_3, attn_5, attn_7], dim=1)
+        attn = self.pw_conv(attn)
+
+        return x * attn
 
 
-    def forward(self, x):
-        u = x.clone()
-        # x = x.chunk(3, dim=-3)
-        attn3 = self.conv3(x)
-        attn5 = self.conv5(x)
-        attn7 = self.conv_spatial(x)
-        attn = torch.cat([attn3, attn5, attn7], dim=-3)
-        attn = self.conv1(attn)
+class MPF(nn.Module):
+    """
+    Multi-scale Progressive Fusion module for skip-connections.
+    Input/Output format follows (B, N, C) for compatibility with token-based encoders.
+    """
+    def __init__(self, channels: int, conv_block: nn.Module):
+        super().__init__()
 
-        return u * attn
+        self.local_conv = conv_block(channels, channels)
+        self.bn = nn.BatchNorm2d(channels)
+        self.act = nn.ReLU(inplace=True)
 
-class FAM(nn.Module):
-    def __init__(self, in_channels):
-        super(FAM,self).__init__()
-        self.dwconv = S_conv(in_channels, in_channels)
-        self.bn = nn.BatchNorm2d(in_channels)
-        # self.relu = nn.GELU()
-        self.relu = nn.ReLU(inplace=True)
-        self.lka = LKA1(in_channels)
+        self.mslka = MultiScaleLKA(channels)
 
-    def forward(self, x0):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """
+        Args:
+            x: Tensor of shape (B, N, C), where N = H * W
+        """
+        B, N, C = x.shape
+        H = W = int(math.sqrt(N))
+        assert H * W == N, "Input token length N must be a perfect square."
 
-        B, N, C = x0.shape
-        H = W = int(N ** 0.5)
-        x = x0.reshape(B, H, W, C).permute(0, 3, 1, 2)
+        feat = x.view(B, H, W, C).permute(0, 3, 1, 2)  # (B, C, H, W)
 
-        x1 = self.dwconv(x)
-        x1 = self.bn(x1)
-        x1 = self.relu(x1)
+        # Branch 1: local convolution
+        local_feat = self.local_conv(feat)
+        local_feat = self.bn(local_feat)
+        local_feat = self.act(local_feat)
 
-        x2 = self.lka(x)
-        x2 = self.bn(x2)
-        x2 = self.relu(x2)
+        # Branch 2: multi-scale attention
+        attn_feat = self.mslka(feat)
+        attn_feat = self.bn(attn_feat)
+        attn_feat = self.act(attn_feat)
 
-        y = x1 + x2
-        y = self.lka(y)
-        y = self.bn(y)
+        # Fusion
+        fused = local_feat + attn_feat
+        fused = self.mslka(fused)
+        fused = self.bn(fused)
 
-        y = y + x1 + x2
-        y = y.reshape(B, C, -1).permute(0, 2, 1)
+        fused = fused + local_feat + attn_feat  # residual aggregation
 
-        return y + x0
+        fused = fused.flatten(2).transpose(1, 2)  # (B, N, C)
+        return fused + x
+
 
 class Embed(nn.Module):
     def __init__(self, img_size=512, patch_size=4, in_chans=3, embed_dim=96, norm_layer=None):
@@ -169,9 +203,9 @@ class Net(nn.Module):
                                 )
 
 
-        self.dbm3 = FAM(384)
-        self.dbm2 = FAM(192)
-        self.dbm1 = FAM(96)
+        self.dbm3 = MPF(384)
+        self.dbm2 = MPF(192)
+        self.dbm1 = MPF(96)
 
         self.up = nn.PixelShuffle(4)
         self.seg = nn.Conv2d(6, 1, 1)
