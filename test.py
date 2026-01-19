@@ -1,7 +1,7 @@
 import torch
 import numpy as np
 from torch.utils.data import DataLoader
-from Net2_3 import Net
+from Net import Net
 
 import os
 from dataloader1 import Datases_loader as dataloader
